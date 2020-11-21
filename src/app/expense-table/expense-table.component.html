@@ -1,3 +1,6 @@
+<button mat-raised-button color="accent" (click)="openDialog()">Ajouter une note de frais</button>
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
@@ -39,6 +42,6 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
   <!-- <mat-paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator> -->
 </table>

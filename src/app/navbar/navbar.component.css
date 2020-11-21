@@ -1,0 +1,12 @@
+.navbar {
+  background-color: #3F51B5;
+  color: white;
+  height: 3rem;
+  font-size: 1rem;
+  padding-left: 2rem;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+p {
+  line-height: 3rem;
+}

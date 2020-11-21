@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ExpenseTableComponent } from './expense-table/expense-table.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     NavbarComponent,
     ExpenseTableComponent,
     ExpenseFormComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
