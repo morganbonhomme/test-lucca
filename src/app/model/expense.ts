@@ -1,7 +1,7 @@
 import { Currency } from './currency';
 
 export interface Expense {
-  id: string;
+  id: string
   purchasedOn: Date;
   nature: string;
   originalAmount: {
@@ -13,6 +13,6 @@ export interface Expense {
     currency: Currency;
   };
   comment: string;
-  createdAt: Date;
-  lastModifiedAt: Date;
+  createdAt: Date,
+  lastModifiedAt: Date
 }

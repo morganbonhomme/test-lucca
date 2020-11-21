@@ -1,8 +1,7 @@
-import { SideDrawerComponent } from './side-drawer/side-drawer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './submodules/angular-material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +18,6 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     NavbarComponent,
     ExpenseTableComponent,
     ExpenseFormComponent,
-    SideDrawerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,8 +25,8 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     HttpClientModule, 
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FormsModule,
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],

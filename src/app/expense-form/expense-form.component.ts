@@ -28,15 +28,12 @@ export class ExpenseFormComponent {
   });
 
   onSubmit() {
-    this.expenseService.saveExpense(this.expenseForm.value).subscribe()
+    this.expenseService.saveExpense(this.expenseForm.value).subscribe();
+    this.expenseService.getExpenses().subscribe();
   }
 
   getErrorMessage() {
     console.log(this.expenseForm.hasError);
   }
 
-  changeAmount() {
-    
-    this.expenseService.getEuroValue(this.expenseForm.value.originalAmount.amount, this.expenseForm.value.originalAmount.currency)
-  }
 }

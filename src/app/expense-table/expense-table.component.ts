@@ -1,29 +1,50 @@
 import { ExpenseService } from '../services/expense.service';
-import { ExpensesDataSource } from './../services/expenses.datasource';
-import { Expense } from './../model/expense';
-import { Component, OnInit } from '@angular/core';
-import { Currency } from '../model/currency';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-expense-table',
   templateUrl: './expense-table.component.html',
-  styleUrls: ['./expense-table.component.css']
+  styleUrls: ['./expense-table.component.css'],
 })
-export class ExpenseTableComponent implements OnInit {
+export class ExpenseTableComponent implements OnInit, OnDestroy{
 
-  dataSource: ExpensesDataSource;
+  constructor(
+    private expenseService: ExpenseService,
+    ) {}
 
-  displayedColumns: string[] = ['id', 'purchasedOn', 'nature', 'originalAmount', 'originalCurrency', 'convertedAmount', 'convertedCurrency', 'comment', 'createdAt', 'lastModifiedAt'];
+  dataSource = new MatTableDataSource()
 
-  constructor(private expenseService: ExpenseService) {}
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  displayedColumns: string[] = [
+    'purchasedOn',
+    'comment',
+    'nature',
+    'originalAmount',
+    'originalCurrency',
+    'convertedAmount'
+  ];
 
-    ngOnInit() {
-        this.dataSource = new ExpensesDataSource(this.expenseService);
-        this.dataSource.loadExpenses();
-    }
+  ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.getExpenses();
+  }
+
+  getExpenses() {
+    this.expenseService.getExpenses().subscribe(
+      response => {
+        this.dataSource.data = response
+      }
+    )
+  }
 
   onRowClicked(row) {
-    console.log('Row clicked: ', row);
-}
+    console.log('Row clicked: ', row.id);
+  }
 
+  ngOnDestroy() {
+  }
+
+  
 }
