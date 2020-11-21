@@ -1,0 +1,63 @@
+<form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+  <mat-form-field floatLabel="always">
+    <mat-label>Date de paiement</mat-label>
+    <input
+      [matDatepicker]="picker"
+      matInput
+      formControlName="purchasedOn"
+      required
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field hintLabel="Max 120 characters" floatLabel="always">
+    <mat-label>Catégorie</mat-label>
+    <input
+      matInput
+      #nature
+      formControlName="nature"
+      maxlength="120"
+      required
+    />
+    <mat-hint align="end">{{ nature.value?.length || 0 }}/120</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field hintLabel="Max 600 characters" floatLabel="always">
+    <mat-label>Description</mat-label>
+    <input
+      matInput
+      #comment
+      formControlName="comment"
+      maxlength="600"
+      required
+    />
+    <mat-hint align="end">{{ comment.value?.length || 0 }}/600</mat-hint>
+  </mat-form-field>
+
+  <div formGroupName="originalAmount">
+    <mat-form-field floatLabel="always">
+      <mat-label>Montant</mat-label>
+      <input type="number" matInput formControlName="amount" required />
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Devise</mat-label>
+      <mat-select formControlName="currency" required>
+        <mat-option *ngFor="let currency of currencies" [value]="currency">
+          {{ currency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!expenseForm.valid"
+  >
+    Valider
+  </button>
+
+</form>

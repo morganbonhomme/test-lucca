@@ -1,0 +1,65 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+</div>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="purchasedOn">
+    <th mat-header-cell *matHeaderCellDef> Payé le </th>
+    <td mat-cell *matCellDef="let element"> {{element.purchasedOn}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="nature">
+    <th mat-header-cell *matHeaderCellDef> Nature </th>
+    <td mat-cell *matCellDef="let element"> {{element.nature}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="originalAmount">
+    <th mat-header-cell *matHeaderCellDef> originalAmount </th>
+    <td mat-cell *matCellDef="let element"> {{element.originalAmount.amount}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="originalCurrency">
+    <th mat-header-cell *matHeaderCellDef> originalCurrency </th>
+    <td mat-cell *matCellDef="let element"> {{element.originalAmount.currency}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="convertedAmount">
+    <th mat-header-cell *matHeaderCellDef> convertedAmount </th>
+    <td mat-cell *matCellDef="let element"> {{element.convertedAmount.amount}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="convertedCurrency">
+    <th mat-header-cell *matHeaderCellDef> convertedCurrency </th>
+    <td mat-cell *matCellDef="let element"> {{element.convertedAmount.currency}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="comment">
+    <th mat-header-cell *matHeaderCellDef> comment </th>
+    <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef> createdAt </th>
+    <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastModifiedAt">
+    <th mat-header-cell *matHeaderCellDef> lastModifiedAt </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastModifiedAt}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+</table>

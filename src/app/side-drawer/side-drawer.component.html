@@ -1,0 +1,16 @@
+<!-- <mat-sidenav-container>  acts as a structural container for our content and sidenav, -->
+  <mat-sidenav-container> 
+
+    <!-- <mat-sidenav-content> which represents the main content -->
+  <mat-sidenav-content>
+    <app-expense-table></app-expense-table>
+    <button mat-raised-button color="primary" (click)="openSideNav()">Ajouter une note de frais</button>
+  </mat-sidenav-content>
+    
+      <!-- and <mat-sidenav> which represents the added side content. -->
+  <mat-sidenav mode="side" [(opened)]="opened" position="end">
+    <app-expense-form></app-expense-form>
+    <button mat-raised-button color="warn" (click)="closeSideNav()">Annuler</button>
+  </mat-sidenav>
+  
+  </mat-sidenav-container>
