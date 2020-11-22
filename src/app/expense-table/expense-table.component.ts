@@ -17,7 +17,6 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './expense-table.component.html',
   styleUrls: ['./expense-table.component.css'],
 })
-
 export class ExpenseTableComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private expenseService: ExpenseService,
@@ -29,26 +28,27 @@ export class ExpenseTableComponent implements OnInit, OnDestroy, AfterViewInit {
     'purchasedOn',
     'comment',
     'nature',
-    // 'originalAmount',
-    // 'originalCurrency',
-    // 'convertedAmount',
+    'originalAmount.amount',
+    'originalCurrency',
+    'convertedAmount.amount',
   ];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.getExpenses();
-    this.dataSource.sort = this.sort;
-
   }
 
   ngAfterViewInit() {
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      if (property.includes('.'))
+        return property.split('.').reduce((o, i) => o[i], item);
+      return item[property];
+    };
     this.dataSource.sort = this.sort;
   }
-
 
   getExpenses() {
     this.expenseService.getExpenses().subscribe((response) => {
