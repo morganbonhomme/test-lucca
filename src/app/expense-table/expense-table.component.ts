@@ -1,16 +1,10 @@
 import { ExpenseFormComponent } from './../expense-form/expense-form.component';
 import { ExpenseService } from '../services/expense.service';
 import {
-  AfterViewInit,
   Component,
-  OnDestroy,
   OnInit,
-  ViewChild,
 } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
 import { take } from 'rxjs/operators';
 
 @Component({
