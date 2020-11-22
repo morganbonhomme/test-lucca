@@ -49,7 +49,6 @@ export class ExpenseFormComponent {
   currencies = Object.keys(Currency).filter((key) => isNaN(+key));
 
   onSubmit() {
-    // this.expenseService.saveExpense(this.expenseForm.value).subscribe();
     this.expenseService
       .saveExpense(this.data, this.expenseForm.value)
       .subscribe();

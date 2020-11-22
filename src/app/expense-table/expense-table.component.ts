@@ -11,57 +11,35 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-expense-table',
   templateUrl: './expense-table.component.html',
   styleUrls: ['./expense-table.component.css'],
 })
-export class ExpenseTableComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ExpenseTableComponent implements OnInit {
+  expenses$;
   constructor(
     private expenseService: ExpenseService,
     public dialog: MatDialog
   ) {}
 
-  dataSource = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'purchasedOn',
-    'comment',
-    'nature',
-    'originalAmount.amount',
-    'originalCurrency',
-    'convertedAmount.amount',
-  ];
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
     this.getExpenses();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sortingDataAccessor = (item, property) => {
-      if (property.includes('.'))
-        return property.split('.').reduce((o, i) => o[i], item);
-      return item[property];
-    };
-    this.dataSource.sort = this.sort;
-  }
-
   getExpenses() {
-    this.expenseService.getExpenses().subscribe((response) => {
-      this.dataSource.data = response;
-    });
+    this.expenses$ = this.expenseService.getExpenses();
   }
 
   openDialog(row = null) {
     const dialogRef = this.dialog.open(ExpenseFormComponent, { data: row });
-    dialogRef.afterClosed().subscribe((result) => {
-      this.getExpenses();
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((_) => {
+        this.getExpenses();
+      });
   }
-
-  ngOnDestroy() {}
 }

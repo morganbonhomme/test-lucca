@@ -1,8 +1,28 @@
 table {
   width: 100%;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  text-align: center;
 }
 
-.mat-row:hover {
+tr {
+  height: 2rem;
+}
+
+tr:hover {
   background-color: rgb(245, 245, 245);
   cursor: pointer;
+}
+
+thead {
+  background-color: lightgray;
+}
+
+thead>tr:hover {
+  background-color: lightgray;
+}
+
+thead>tr>th:hover {
+  font-weight: 700;
+  background-color: rgb(245, 245, 245);
 }
