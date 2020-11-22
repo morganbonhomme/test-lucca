@@ -11,8 +11,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./expense-form.component.css'],
 })
 export class ExpenseFormComponent {
-
-  title: String = "Ajouter une note de frais"
+  title: String = 'Ajouter une note de frais';
+  tomorrow = new Date();
 
   expenseForm = new FormGroup({
     purchasedOn: new FormControl('', Validators.required),
@@ -25,15 +25,15 @@ export class ExpenseFormComponent {
     }),
   });
 
-
-
   constructor(
     private expenseService: ExpenseService,
 
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {  
+  ) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+
     if (data) {
-      this.title = "Modifier une note de frais"
+      this.title = 'Modifier une note de frais';
       this.expenseForm.patchValue({
         purchasedOn: data.purchasedOn,
         nature: data.nature,
@@ -41,19 +41,18 @@ export class ExpenseFormComponent {
           amount: data.originalAmount.amount,
           currency: data.originalAmount.currency,
         },
-        comment: data.comment
-      })
+        comment: data.comment,
+      });
     }
-   
   }
 
   currencies = Object.keys(Currency).filter((key) => isNaN(+key));
 
-  
-
   onSubmit() {
     // this.expenseService.saveExpense(this.expenseForm.value).subscribe();
-    this.expenseService.saveExpense(this.data, this.expenseForm.value).subscribe()
+    this.expenseService
+      .saveExpense(this.data, this.expenseForm.value)
+      .subscribe();
   }
 
   getErrorMessage() {
@@ -61,9 +60,6 @@ export class ExpenseFormComponent {
   }
 
   delete() {
-    this.expenseService
-      .deleteExpense(this.data.id)
-      .subscribe();
+    this.expenseService.deleteExpense(this.data.id).subscribe();
   }
-
 }
