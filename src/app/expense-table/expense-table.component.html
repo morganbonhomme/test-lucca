@@ -1,7 +1,7 @@
 <button mat-raised-button color="accent" (click)="openDialog()">Ajouter une note de frais</button>
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort matSortDisableClear="true" class="mat-elevation-z8">
 
   <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
@@ -9,35 +9,35 @@
 
   <!-- Name Column -->
   <ng-container matColumnDef="purchasedOn">
-    <th mat-header-cell *matHeaderCellDef> Payé le </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header > Payé le </th>
     <td mat-cell *matCellDef="let element"> {{element.purchasedOn | date:'dd/MM/yy'}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="nature">
-    <th mat-header-cell *matHeaderCellDef> Catégorie </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header > Catégorie </th>
     <td mat-cell *matCellDef="let element"> {{element.nature}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="originalAmount">
-    <th mat-header-cell *matHeaderCellDef> Montant  </th>
+  <!-- <ng-container matColumnDef="originalAmount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant  </th>
     <td mat-cell *matCellDef="let element"> {{element.originalAmount.amount}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="originalCurrency">
-    <th mat-header-cell *matHeaderCellDef> Monnaie Locale </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Monnaie Locale </th>
     <td mat-cell *matCellDef="let element"> {{element.originalAmount.currency}} </td>
   </ng-container>
 
   <ng-container matColumnDef="convertedAmount">
-    <th mat-header-cell *matHeaderCellDef> Montant </th>
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> Montant </th>
     <td mat-cell *matCellDef="let element"> {{element.convertedAmount.amount | currency:'EUR':'symbol'}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="comment">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header > Description </th>
     <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
   </ng-container>
 
