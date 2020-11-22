@@ -8,4 +8,8 @@ export interface Input {
     currency: Currency;
   };
   comment: string;
+  convertedAmount?: {
+    amount: number,
+    currency: Currency,
+  },
 }

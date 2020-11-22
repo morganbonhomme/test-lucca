@@ -6,6 +6,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { of, Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Currency } from '../model/currency';
+import * as helper from '../helpers/expenses.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -54,16 +55,19 @@ export class ExpenseService {
     return newAmount;
   }
 
-  transformInputToExpense(inputExpense: Input): Expense {
+  transformInput(inputExpense: Input) {
     const convertedAmount = this.getEuroValue(
       inputExpense.originalAmount.amount,
       inputExpense.originalAmount.currency
     );
     return {
-      ...inputExpense,
-      id: null,
-      createdAt: new Date(Date.now()),
-      lastModifiedAt: new Date(Date.now()),
+      purchasedOn: inputExpense.purchasedOn,
+      originalAmount: {
+        amount: inputExpense.originalAmount.amount,
+        currency: inputExpense.originalAmount.currency,
+      },
+      comment: helper.capitalize(inputExpense.comment.trim()),
+      nature: helper.capitalize(inputExpense.nature.trim()),
       convertedAmount: {
         amount: convertedAmount,
         currency: Currency.EUR,
@@ -72,18 +76,18 @@ export class ExpenseService {
   }
 
   saveExpense(data, inputExpense: Input) {
+    const dataExpense = this.transformInput(inputExpense);
     if (!data) {
-      return this.createExpense(inputExpense);
+      return this.createExpense(dataExpense);
     } else {
-      return this.updateExpense(data.id, inputExpense)
+      return this.updateExpense(data.id, dataExpense)
     }
   }
 
 
   createExpense(inputExpense: Input) {
-    const dataExpense = this.transformInputToExpense(inputExpense);
     return this.http
-      .post<Expense>(this.expenseURL, dataExpense, this.httpOptions)
+      .post<Expense>(this.expenseURL, inputExpense, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
