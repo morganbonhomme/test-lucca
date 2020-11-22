@@ -3,7 +3,7 @@ import { Currency } from './../model/currency';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-expense-form',
@@ -30,7 +30,7 @@ export class ExpenseFormComponent {
   constructor(
     private expenseService: ExpenseService,
 
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {  
     if (data) {
       this.title = "Modifier une note de frais"
@@ -52,8 +52,8 @@ export class ExpenseFormComponent {
   
 
   onSubmit() {
-    this.expenseService.saveExpense(this.expenseForm.value).subscribe();
-    
+    // this.expenseService.saveExpense(this.expenseForm.value).subscribe();
+    this.expenseService.saveExpense(this.data, this.expenseForm.value).subscribe()
   }
 
   getErrorMessage() {

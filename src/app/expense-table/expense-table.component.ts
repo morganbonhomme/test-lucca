@@ -47,7 +47,7 @@ export class ExpenseTableComponent implements OnInit, OnDestroy {
     });
   }
 
-  openDialog(row) {
+  openDialog(row = null) {
     const dialogRef = this.dialog.open(ExpenseFormComponent, { data: row });
     dialogRef.afterClosed().subscribe((result) => {
       this.getExpenses();

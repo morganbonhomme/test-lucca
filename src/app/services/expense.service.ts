@@ -71,7 +71,16 @@ export class ExpenseService {
     };
   }
 
-  saveExpense(inputExpense: Input) {
+  saveExpense(data, inputExpense: Input) {
+    if (!data) {
+      return this.createExpense(inputExpense);
+    } else {
+      return this.updateExpense(data.id, inputExpense)
+    }
+  }
+
+
+  createExpense(inputExpense: Input) {
     const dataExpense = this.transformInputToExpense(inputExpense);
     return this.http
       .post<Expense>(this.expenseURL, dataExpense, this.httpOptions)
@@ -90,9 +99,9 @@ export class ExpenseService {
       .pipe(catchError(this.handleError));
   }
 
-  updateExpense(id: string, updateExpense): Observable<Expense> {
+  updateExpense(id: string, inputExpense): Observable<Expense> {
     return this.http
-      .put<Expense>(`${this.expenseURL}/${id}`, updateExpense)
+      .put<Expense>(`${this.expenseURL}/${id}`, inputExpense)
       .pipe(catchError(this.handleError));
   }
 
