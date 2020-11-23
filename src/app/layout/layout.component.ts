@@ -9,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
+  page: number = 1;;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  public clickedEvent: Event;
 
+  onPageChanged(pageNumber) {
+   this.page = pageNumber;
+  }
 }
+ 

@@ -84,14 +84,19 @@ export class ExpenseService {
     }
   }
 
-
   createExpense(inputExpense: Input) {
     return this.http
       .post<Expense>(this.expenseURL, inputExpense, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  getExpenses(): Observable<Expense[]> {
+  getExpenses(page: number): Observable<Expense[]> {
+    return this.http
+      .get<Expense[]>(`${this.expenseURL}?_page=${page}&_limit=10`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getTotalCountOfExpenses(): Observable<Expense[]> {
     return this.http
       .get<Expense[]>(this.expenseURL)
       .pipe(catchError(this.handleError));

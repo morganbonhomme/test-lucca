@@ -1,16 +1,11 @@
 <button mat-raised-button color="accent" (click)="openDialog()">
   Ajouter une note de frais
 </button>
-
+ 
 <table>
   <thead>
     <tr>
-      <th>Payé le</th>
-      <th>Catégorie</th>
-      <th>Description</th>
-      <th>Montant</th>
-      <th>Devise</th>
-      <th>Montant (€)</th>
+      <th *ngFor="let title of thead" [value]="title.key" > {{ title.value }}</th>
     </tr>
   </thead>
   <tbody>

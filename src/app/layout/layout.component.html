@@ -1,6 +1,7 @@
 <section>
-  <h1> Gérer mes notes de frais</h1>
-  <app-expense-table> </app-expense-table>
-  
-</section>
+  <h1>Gérer mes notes de frais</h1>
 
+  <app-expense-table [page]="page"> </app-expense-table>
+  <app-expense-pagination (onPageChanged)="onPageChanged($event)">
+  </app-expense-pagination>
+</section>
