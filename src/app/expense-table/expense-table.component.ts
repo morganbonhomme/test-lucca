@@ -20,6 +20,7 @@ import { Observable } from "rxjs";
 export class ExpenseTableComponent {
 
   @Input() pageNumber: number;
+  @Input() dateFilter: string;
 
   thead = Object.entries(DataDisplayed).map(([key, value]) => ({ key, value }))
   expenses$;
@@ -33,11 +34,18 @@ export class ExpenseTableComponent {
 
   ngOnChanges() {
     this.getExpenses();
+    if (this.dateFilter)
+    console.log(this.dateFilter, 'ngchange')
   }
 
   getExpenses(): Observable<Expense[]> {
+    if(this.dateFilter) {
+      return this.expenses$ = this.expenseService.getFilteredExpense(this.dateFilter);
+    } 
    return this.expenses$ = this.expenseService.getExpenses(this.pageNumber);
   }
+
+
 
   openDialog(row = null) {
     const dialogRef = this.dialog.open(ExpenseFormComponent, { data: row });

@@ -8,9 +8,15 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
   pageNumber: number = 1;
+  dateFilter: string;
+
   constructor(public dialog: MatDialog) {}
 
-  onPageChanged(pageNumber) {
+  onPageChanged(pageNumber: number) {
     this.pageNumber = pageNumber;
+  }
+
+  onFilterChanged(startDate: string) {
+    this.dateFilter = startDate;
   }
 }

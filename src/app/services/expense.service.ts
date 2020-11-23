@@ -85,9 +85,9 @@ export class ExpenseService {
       .pipe(catchError(this.handleError));
   }
 
-  getExpense(id: string): Observable<Expense> {
+  getFilteredExpense(startDate: string): Observable<Expense[]> {
     return this.http
-      .get<Expense>(`${this.expenseURL}/${id}`)
+      .get<Expense[]>(`${this.expenseURL}/?createdAt=since,${startDate}`)
       .pipe(catchError(this.handleError));
   }
 
