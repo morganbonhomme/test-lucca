@@ -23,33 +23,16 @@ export class ExpenseService {
   };
 
   handleError(error: HttpErrorResponse) {
-    console.log(error)
     if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      console.log('An error occurred:', error.error.message);
     } else {
       console.log(
         `Error status: ${error.status}, ` + `Error message: ${error.message}`
       );
     }
-    // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
   }
 
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     // TODO: send the error to remote logging infrastructure
-  //     console.error(error); // log to console instead
-
-  //     // TODO: better job of transforming error for user consumption
-  //     console.log(`${operation} failed: ${error.message}`);
-
-  //     // Let the app keep running by returning an empty result.
-  //     return of(result as T);
-  //   };
-  // }
-
-  // LOGIC
   getEuroValue(inputAmount: number, currency: Currency): number {
     let newAmount = this.currencyService.convertToEuro(inputAmount, currency);
     return newAmount;

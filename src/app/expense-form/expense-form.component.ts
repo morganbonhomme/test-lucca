@@ -4,16 +4,18 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-expense-form',
   templateUrl: './expense-form.component.html',
   styleUrls: ['./expense-form.component.css'],
 })
+
 export class ExpenseFormComponent {
   title: String = 'Ajouter une note de frais';
   tomorrow = new Date();
-
+  currencies = Object.keys(Currency).filter((key) => isNaN(+key));
   expenseForm = new FormGroup({
     purchasedOn: new FormControl('', Validators.required),
     nature: new FormControl('', Validators.required),
@@ -27,7 +29,6 @@ export class ExpenseFormComponent {
 
   constructor(
     private expenseService: ExpenseService,
-
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.tomorrow.setDate(this.tomorrow.getDate());
@@ -46,19 +47,14 @@ export class ExpenseFormComponent {
     }
   }
 
-  currencies = Object.keys(Currency).filter((key) => isNaN(+key));
-
   onSubmit() {
     this.expenseService
       .saveExpense(this.data, this.expenseForm.value)
+      .pipe(take(1))
       .subscribe();
   }
 
-  getErrorMessage() {
-    console.log(this.expenseForm.hasError);
-  }
-
   delete() {
-    this.expenseService.deleteExpense(this.data.id).subscribe();
+    this.expenseService.deleteExpense(this.data.id).pipe(take(1)).subscribe();
   }
 }

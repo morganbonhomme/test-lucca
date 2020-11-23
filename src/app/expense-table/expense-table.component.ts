@@ -4,7 +4,6 @@ import { ExpenseFormComponent } from './../expense-form/expense-form.component';
 import { ExpenseService } from '../services/expense.service';
 import {
   Component,
-  OnInit,
   Input
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,19 +17,17 @@ import { Observable } from "rxjs";
   styleUrls: ['./expense-table.component.css'],
 })
 
-export class ExpenseTableComponent implements OnInit {
+export class ExpenseTableComponent {
 
-  @Input() page: number;
+  @Input() pageNumber: number;
+
   thead = Object.entries(DataDisplayed).map(([key, value]) => ({ key, value }))
- 
-
   expenses$;
+
   constructor(
     private expenseService: ExpenseService,
     public dialog: MatDialog
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.getExpenses();
   }
 
@@ -39,7 +36,7 @@ export class ExpenseTableComponent implements OnInit {
   }
 
   getExpenses(): Observable<Expense[]> {
-   return this.expenses$ = this.expenseService.getExpenses(this.page);
+   return this.expenses$ = this.expenseService.getExpenses(this.pageNumber);
   }
 
   openDialog(row = null) {

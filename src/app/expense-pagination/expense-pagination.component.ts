@@ -1,40 +1,41 @@
 import { ExpenseService } from './../services/expense.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-expense-pagination',
   templateUrl: './expense-pagination.component.html',
-  styleUrls: ['./expense-pagination.component.css']
+  styleUrls: ['./expense-pagination.component.css'],
 })
-export class ExpensePaginationComponent implements OnInit {
-
-  page: number = 1;
-  totalPage$;
-  @Output() onPageChanged = new EventEmitter<Number>();
+export class ExpensePaginationComponent {
   
-  constructor(
-    expenseService: ExpenseService
-  ) { 
-    expenseService.getTotalCountOfExpenses().subscribe(
-      response => console.log(response.length)
-    )
+  pageNumber: number = 1;
+  totalPage;
+
+  @Output() onPageChanged = new EventEmitter<Number>();
+
+  constructor(private expenseService: ExpenseService) {
+    this.getNumberOfPage()
   }
 
-  ngOnInit(): void {
+  getNumberOfPage() {
+    this.expenseService
+    .getTotalCountOfExpenses()
+    .pipe(take(1))
+    .subscribe((resp) => (this.totalPage = Math.ceil(resp.length / 10)));
   }
 
-
+  changePage(delta) {
+    this.pageNumber += delta;
+    this.onPageChanged.emit(this.pageNumber);
+  }
+  
   incrementPage() {
-    this.page += 1;
-    this.onPageChanged.emit(this.page)
+    this.changePage(1);
+  }
+  
+  decrementPage() {
+    this.changePage(-1);
   }
 
-  decrementPage() {
-    if (this.page === 1) {
-      return;
-    }
-    this.page -= 1;
-    this.onPageChanged.emit(this.page)
-  }
 }

@@ -1,5 +1,5 @@
 <div>
-  <button mat-stroked-button (click)="decrementPage()" [disabled]="page === 1">&#8592;</button>
-  <p>Page: {{ page }} / </p>
-  <button mat-stroked-button (click)="incrementPage()">&#8594;</button>
+  <button mat-stroked-button (click)="decrementPage()" [disabled]="pageNumber === 1">&#8592;</button>
+  <p>Page: {{ pageNumber }} / {{ totalPage }} </p>
+  <button mat-stroked-button (click)="incrementPage()" [disabled]="pageNumber === totalPage">&#8594;</button>
 </div>
