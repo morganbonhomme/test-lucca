@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { start } from 'repl';
 
 @Component({
   selector: 'app-expense-filter',
@@ -20,6 +19,11 @@ export class ExpenseFilterComponent implements OnInit {
   addNewFilter() {
     const startDate = new Date(this.startDate)
     this.onFilterChanged.emit(startDate.toISOString())
+  }
+
+  removeFilter() {
+    this.startDate = null;
+    this.onFilterChanged.emit(null)
   }
 
 }

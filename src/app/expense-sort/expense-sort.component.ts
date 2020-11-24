@@ -1,19 +1,21 @@
 import { DataDisplayed } from './../model/dataDisplayed';
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-expense-sort',
   templateUrl: './expense-sort.component.html',
-  styleUrls: ['./expense-sort.component.css']
+  styleUrls: ['./expense-sort.component.css'],
 })
-export class ExpenseSortComponent implements OnInit {
+export class ExpenseSortComponent {
+  @Output() onDataSelected = new EventEmitter<string>();
 
-  thead = Object.entries(DataDisplayed).map(([key, value]) => ({ key, value }))
-  constructor() { 
+  dataDisplayed = Object.entries(DataDisplayed).map(([key, value]) => ({
+    key,
+    value,
+  }));
+  constructor() {}
 
+  selectData(data) {
+    this.onDataSelected.emit(data)
   }
-
-  ngOnInit(): void {
-  }
-
 }

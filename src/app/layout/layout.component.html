@@ -1,7 +1,21 @@
 <section>
   <h1>Gérer mes notes de frais</h1>
-  <app-expense-filter (onFilterChanged)="onFilterChanged($event)"></app-expense-filter>
-  <app-expense-table [dateFilter]="dateFilter" [pageNumber]="pageNumber"> </app-expense-table>
-  <app-expense-pagination (onPageChanged)="onPageChanged($event)">
+  <app-expense-filter
+    (onFilterChanged)="onFilterChanged($event)"
+  ></app-expense-filter>
+  <app-expense-sort
+    (onDataSelected)="onDataSelected($event)"
+  ></app-expense-sort>
+  <app-expense-table
+    [pageNumber]="pageNumber"
+    [startDate]="startDate"
+    [dataSelected]="dataSelected"
+    (onTotalNumberOfPageChanged)="onTotalNumberOfPageChanged($event)"
+  >
+  </app-expense-table>
+  <app-expense-pagination
+    [totalNumberOfPage]="totalNumberOfPage"
+    (onPageChanged)="onPageChanged($event)"
+  >
   </app-expense-pagination>
 </section>

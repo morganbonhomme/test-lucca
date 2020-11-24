@@ -1,3 +1,4 @@
+import { DataDisplayed } from './../model/dataDisplayed';
 import { MatDialog } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 
@@ -7,8 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent {
-  pageNumber: number = 1;
-  dateFilter: string;
+  pageNumber = 1;
+  startDate = null;
+  dataSelected = null;
+  sortedType = null;
+  totalNumberOfPage = null;
 
   constructor(public dialog: MatDialog) {}
 
@@ -17,6 +21,17 @@ export class LayoutComponent {
   }
 
   onFilterChanged(startDate: string) {
-    this.dateFilter = startDate;
+    this.pageNumber = 1;
+    this.startDate = startDate;
   }
+
+  onDataSelected(dataSelected: string) {
+    this.dataSelected = dataSelected;
+    this.pageNumber = 1
+  }
+
+  onTotalNumberOfPageChanged(totalNumberOfPage: number) {
+    this.totalNumberOfPage = totalNumberOfPage;
 }
+}
+

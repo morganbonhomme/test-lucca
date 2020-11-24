@@ -10,20 +10,23 @@ import { take } from 'rxjs/operators';
 export class ExpensePaginationComponent {
   
   pageNumber: number = 1;
-  totalPage;
+
+  @Input() totalNumberOfPage;
 
   @Output() onPageChanged = new EventEmitter<Number>();
 
   constructor(private expenseService: ExpenseService) {
-    this.getNumberOfPage()
   }
 
-  getNumberOfPage() {
-    this.expenseService
-    .getTotalCountOfExpenses()
-    .pipe(take(1))
-    .subscribe((resp) => (this.totalPage = Math.ceil(resp.length / 10)));
+  ngOnChanges() {
+    if (this.totalNumberOfPage === 0) {
+      this.totalNumberOfPage = 1;
+    }
+    if (this.pageNumber > this.totalNumberOfPage && this.totalNumberOfPage !== null) {
+      this.pageNumber = this.totalNumberOfPage
+    }
   }
+
 
   changePage(delta) {
     this.pageNumber += delta;

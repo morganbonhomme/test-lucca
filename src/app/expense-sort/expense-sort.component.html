@@ -1,5 +1,5 @@
-  <!-- <label for="sort">Trier par</label>
-  <select name="sort" [(ngModel)]="title">
-    <option value="">Choose a category</option>
-    <option *ngFor="let title of thead" [ngValue]="title.key">{{ title.value }}</option>
-  </select> -->
+  <label for="sort">Trier par</label>
+  <select name="sort" [(ngModel)]="dataSelected" (ngModelChange)="selectData($event)">
+    <option value="">--</option>
+    <option *ngFor="let data of dataDisplayed" [ngValue]="data.key">{{ data.value }}</option>
+  </select>
