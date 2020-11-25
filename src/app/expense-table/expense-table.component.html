@@ -1,21 +1,27 @@
-<button mat-raised-button color="accent" (click)="openDialog()">
+<button
+  class="addButton"
+  mat-raised-button
+  color="accent"
+  (click)="openDialog()"
+>
   Ajouter une note de frais
 </button>
-<h1> {{ totalNumberOfPage$ | async }}</h1> 
 <table>
   <thead>
     <tr>
-      <th *ngFor="let title of thead" [value]="title.key" > {{ title.value }}</th>
+      <th *ngFor="let title of thead" [value]="title.key">{{ title.value }}</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let expense of expenses$ | async" (click)="openDialog(expense)">
-      <td>{{ expense.purchasedOn | date: "dd/MM/yy" }}</td>
-      <td>{{ expense.nature }}</td>
+      <td class="smallColumn">{{ expense.purchasedOn | date: "dd/MM/yy" }}</td>
+      <td class="mediumColumn">{{ expense.nature }}</td>
       <td>{{ expense.comment }}</td>
-      <td>{{ expense.originalAmount.amount }}</td>
-      <td>{{ expense.originalAmount.currency }}</td>
-      <td>{{ expense.convertedAmount.amount | currency: "EUR":"symbol" }}</td>
+      <td class="smallColumn">{{ expense.originalAmount.amount }}</td>
+      <td class="smallColumn">{{ expense.originalAmount.currency }}</td>
+      <td class="smallColumn text--right">
+        {{ expense.convertedAmount.amount | currency: "EUR":"symbol" }}
+      </td>
     </tr>
   </tbody>
 </table>

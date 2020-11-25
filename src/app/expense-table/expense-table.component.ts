@@ -14,7 +14,6 @@ import { take } from 'rxjs/operators';
 export class ExpenseTableComponent implements OnInit {
   @Input() pageNumber;
   @Input() startDate;
-  @Input() dataSelected;
 
   @Output() onTotalNumberOfPageChanged = new EventEmitter<number>();
 

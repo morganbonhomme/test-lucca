@@ -2,7 +2,6 @@ table {
   width: 100%;
   border: 1px solid lightgray;
   border-collapse: collapse;
-  text-align: center;
 }
 
 tr {
@@ -25,4 +24,26 @@ thead>tr:hover {
 thead>tr>th:hover {
   font-weight: 700;
   background-color: rgb(245, 245, 245);
+}
+
+td {
+  padding-left: 20px
+}
+
+.addButton {
+  float: right;
+}
+
+.smallColumn {
+  width: 7rem;
+  text-align: center;
+}
+
+.mediumColumn {
+  width: 20rem;
+
+}
+
+.text--right {
+  text-align: right;
 }

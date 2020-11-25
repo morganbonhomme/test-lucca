@@ -16,7 +16,7 @@ export class ExpenseFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addNewFilter() {
+  addNewFilter(event) {
     const startDate = new Date(this.startDate)
     this.onFilterChanged.emit(startDate.toISOString())
   }

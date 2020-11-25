@@ -3,17 +3,14 @@
   <app-expense-filter
     (onFilterChanged)="onFilterChanged($event)"
   ></app-expense-filter>
-  <app-expense-sort
-    (onDataSelected)="onDataSelected($event)"
-  ></app-expense-sort>
   <app-expense-table
     [pageNumber]="pageNumber"
     [startDate]="startDate"
-    [dataSelected]="dataSelected"
     (onTotalNumberOfPageChanged)="onTotalNumberOfPageChanged($event)"
   >
   </app-expense-table>
   <app-expense-pagination
+    class='pagination'
     [totalNumberOfPage]="totalNumberOfPage"
     (onPageChanged)="onPageChanged($event)"
   >

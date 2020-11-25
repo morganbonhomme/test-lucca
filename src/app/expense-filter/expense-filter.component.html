@@ -1,7 +1,7 @@
-<p>Rechercher une dépense payée</p>
+<span>Rechercher les dépenses payées</span>
 
 <mat-form-field>
-  <mat-label>A partir du</mat-label>
+  <mat-label>depuis le</mat-label>
   <input
     matInput
     [matDatepicker]="picker"
@@ -12,6 +12,6 @@
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
-<button (click)="removeFilter()" *ngIf="startDate != null">
+<button mat-stroked-button color="warn" (click)="removeFilter()" *ngIf="startDate != null">
   Enlever le filtre
 </button>

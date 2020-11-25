@@ -13,7 +13,6 @@ import { ExpenseTableComponent } from './expense-table/expense-table.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ExpenseFilterComponent } from './expense-filter/expense-filter.component';
-import { ExpenseSortComponent } from './expense-sort/expense-sort.component';
 import { ExpensePaginationComponent } from './expense-pagination/expense-pagination.component';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { ExpensePaginationComponent } from './expense-pagination/expense-paginat
     ExpenseFormComponent,
     LayoutComponent,
     ExpenseFilterComponent,
-    ExpenseSortComponent,
     ExpensePaginationComponent,
   ],
   imports: [
