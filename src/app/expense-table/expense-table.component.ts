@@ -1,5 +1,4 @@
 import { DataDisplayed } from './../model/dataDisplayed';
-import { Expense } from './../model/expense';
 import { ExpenseFormComponent } from './../expense-form/expense-form.component';
 import { ExpenseService } from '../services/expense.service';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
@@ -24,12 +23,10 @@ export class ExpenseTableComponent implements OnInit {
   constructor(
     private expenseService: ExpenseService,
     public dialog: MatDialog
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.getTotalCountOfExpenses();
-    
   }
 
   ngOnChanges() {
@@ -38,23 +35,20 @@ export class ExpenseTableComponent implements OnInit {
   }
 
   getExpenses() {
-    return this.expenses$ = this.expenseService.getExpenses(
+    return (this.expenses$ = this.expenseService.getExpenses(
       this.pageNumber,
       this.startDate
-    );
+    ));
   }
 
   getTotalCountOfExpenses() {
     return this.expenseService
       .getExpenses(null, this.startDate)
-      .pipe()
-      .subscribe( resp => {
+      .pipe(take(1))
+      .subscribe((resp) => {
         this.totalNumberOfPage = Math.ceil(resp.length / 10);
         this.onTotalNumberOfPageChanged.emit(this.totalNumberOfPage);
-      }
-      );
-
-      
+      });
   }
 
   openDialog(row = null) {
@@ -65,8 +59,7 @@ export class ExpenseTableComponent implements OnInit {
       .subscribe((_) => {
         this.getExpenses();
         this.getTotalCountOfExpenses();
-      this.onTotalNumberOfPageChanged.emit(this.totalNumberOfPage);
-
+        this.onTotalNumberOfPageChanged.emit(this.totalNumberOfPage);
       });
   }
 }

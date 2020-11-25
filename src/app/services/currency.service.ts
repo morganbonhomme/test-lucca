@@ -1,23 +1,14 @@
 import { Currency } from '../model/currency';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { take } from 'rxjs/operators';
-
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-
-
 export class CurrencyService {
-
-  exchangeRates;
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   convertToEuro(inputAmount: number, currency: Currency): number {
- 
     let convertedAmount: number;
     switch (currency) {
       case Currency.CHF:
@@ -32,6 +23,6 @@ export class CurrencyService {
       default:
         return inputAmount;
     }
-    return convertedAmount
+    return convertedAmount;
   }
 }

@@ -2,7 +2,11 @@ import { Expense } from '../model/expense';
 import { Input } from './../model/input';
 import { CurrencyService } from './currency.service';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Currency } from '../model/currency';
@@ -63,7 +67,7 @@ export class ExpenseService {
     if (!data) {
       return this.createExpense(dataExpense);
     } else {
-      return this.updateExpense(data.id, dataExpense)
+      return this.updateExpense(data.id, dataExpense);
     }
   }
 
@@ -74,31 +78,29 @@ export class ExpenseService {
   }
 
   createURL(page: number, startDate: string): string {
-  // Get the total count of expenses to show pagination when no filter
-  let expenseURL = this.expenseURL;
+    // Get the total count of expenses to show pagination when no filter
+    let expenseURL = this.expenseURL;
 
-  // Get the total count of expenses to show pagination when there is a filter
-  if( page === null && startDate !== null) {
-    expenseURL = `${this.expenseURL}?purchasedOn=since,${startDate}`
-  }
+    // Get the total count of expenses to show pagination when there is a filter
+    if (page === null && startDate !== null) {
+      expenseURL = `${this.expenseURL}?purchasedOn=since,${startDate}`;
+    }
 
-  // Get expenses to show by page for the table when no filter
-  if (page !== null && startDate === null ) {
-    expenseURL = `${this.expenseURL}?_page=${page}&_limit=10`
-  }
+    // Get expenses to show by page for the table when no filter
+    if (page !== null && startDate === null) {
+      expenseURL = `${this.expenseURL}?_page=${page}&_limit=10`;
+    }
 
-  // Get expenses to show by page for the table when there is a filter
-  if (page !== null && startDate !== null ) {
-    expenseURL = `${this.expenseURL}?_page=${page}&_limit=10&purchasedOn=since,${startDate}`
-  }
+    // Get expenses to show by page for the table when there is a filter
+    if (page !== null && startDate !== null) {
+      expenseURL = `${this.expenseURL}?_page=${page}&_limit=10&purchasedOn=since,${startDate}`;
+    }
     return expenseURL;
   }
 
   getExpenses(page: number, startDate: string): Observable<Expense[]> {
-    const URL = this.createURL(page, startDate)
-    return this.http
-      .get<Expense[]>(URL)
-      .pipe(catchError(this.handleError));
+    const URL = this.createURL(page, startDate);
+    return this.http.get<Expense[]>(URL).pipe(catchError(this.handleError));
   }
 
   updateExpense(id: string, inputExpense): Observable<Expense> {
@@ -112,5 +114,4 @@ export class ExpenseService {
       .delete<Expense>(`${this.expenseURL}/${id}`)
       .pipe(catchError(this.handleError));
   }
-
 }

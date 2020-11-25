@@ -1,6 +1,5 @@
 import { ExpenseService } from './../services/expense.service';
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-expense-pagination',
@@ -12,7 +11,6 @@ export class ExpensePaginationComponent {
   pageNumber: number = 1;
 
   @Input() totalNumberOfPage;
-
   @Output() onPageChanged = new EventEmitter<Number>();
 
   constructor(private expenseService: ExpenseService) {
