@@ -24,5 +24,8 @@ export class LayoutComponent {
 
   onTotalNumberOfPageChanged(totalNumberOfPage: number) {
     this.totalNumberOfPage = totalNumberOfPage;
+    if (this.pageNumber > this.totalNumberOfPage) {
+      this.pageNumber = this.totalNumberOfPage
+    }
   }
 }
